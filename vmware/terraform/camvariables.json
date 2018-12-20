@@ -407,10 +407,10 @@
     {
       "name": "Node01_redis_port",
       "type": "string",
-      "description": "MariaDB port to service SQL requests.",
-      "default": "3306",
+      "description": "Redis port to service requests.",
+      "default": "6379",
       "hidden": false,
-      "label": "MariaDB Port - Node01",
+      "label": "Redis Port - Node01",
       "secured": false,
       "required": true,
       "immutable": false,

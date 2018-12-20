@@ -143,8 +143,8 @@ variable "Node01-os_admin_user" {
 #Variable : Node01_mariadb_port
 variable "Node01_redis_port" {
   type        = "string"
-  description = "The mariadb port to service SQL requests."
-  default     = "3306"
+  description = "The redis port to service requests."
+  default     = "6379"
 }
 
 
