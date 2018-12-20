@@ -578,6 +578,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
+      "bash -c 'systemctl stop redis.service'",
       "bash -c 'pkill redis-server'",
       "bash -c 'systemctl daemon-reload'"
     ]
