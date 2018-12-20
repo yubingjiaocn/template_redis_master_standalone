@@ -495,8 +495,10 @@ resource "camc_softwaredeploy" "Node01_mariadb" {
     },
     "redisio": {
       "package_install": "true",
-      'servers': [
-        {'port':  "${var.Node01_redis_port}"}
+      "servers": [
+        {
+          "port": "${var.Node01_redis_port}"
+        }
       ]
     }
   },
