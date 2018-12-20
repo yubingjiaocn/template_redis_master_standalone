@@ -556,8 +556,7 @@ resource "null_resource" "Node01_Service" {
 
   provisioner "remote-exec" {
     inline = [
-      "bash -c 'systemctl stop redis.service'",
-      "bash -c 'pkill redis-server'"
+      "bash -c 'systemctl stop redis.service'"
     ]
   }
 
