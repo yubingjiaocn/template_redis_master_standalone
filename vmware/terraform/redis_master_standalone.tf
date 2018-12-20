@@ -140,7 +140,7 @@ variable "Node01-os_admin_user" {
   description = "Name of the admin user account in the virtual machine that will be accessed via SSH"
 }
 
-#Variable : Node01_mariadb_port
+#Variable : Node01_redis_port
 variable "Node01_redis_port" {
   type        = "string"
   description = "The redis port to service requests."
@@ -469,12 +469,12 @@ EOT
 }
 
 #########################################################
-##### Resource : Node01_mariadb
+##### Resource : Node01_redis
 #########################################################
 
-resource "camc_softwaredeploy" "Node01_mariadb" {
+resource "camc_softwaredeploy" "Node01_redis" {
   depends_on      = ["camc_bootstrap.Node01_chef_bootstrap_comp"]
-  name            = "Node01_mariadb"
+  name            = "Node01_redis"
   camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
   access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
@@ -487,7 +487,7 @@ resource "camc_softwaredeploy" "Node01_mariadb" {
   "environment_name": "_default",
   "host_ip": "${vsphere_virtual_machine.Node01.clone.0.customize.0.network_interface.0.ipv4_address}",
   "node_name": "${var.Node01-name}",
-  "runlist": "recipe[redisio]",
+  "runlist": "recipe[redisio], recipe[redisio::enable]",
   "node_attributes": {
     "ibm": {
       "sw_repo": "${var.ibm_sw_repo}",
@@ -497,7 +497,8 @@ resource "camc_softwaredeploy" "Node01_mariadb" {
       "package_install": "true",
       "servers": [
         {
-          "port": "${var.Node01_redis_port}"
+          "port": "${var.Node01_redis_port}",
+          "name": "${var.Node01-name}"
         }
       ]
     }
